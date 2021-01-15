@@ -1,9 +1,10 @@
 import React from "react";
+import Calculator from "./layouts/Calculator";
 
 function App() {
   return (
     <div>
-      <h1>Photomath calculator</h1>
+      <Calculator />
     </div>
   );
 }
