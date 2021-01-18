@@ -1,7 +1,7 @@
 import React from "react";
 
 const Result = () => {
-  return <span>result</span>;
+  return <span style={{flex: 1}}>result</span>;
 };
 
 export default Result;

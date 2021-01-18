@@ -1,0 +1,19 @@
+.keyboard-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  width: 100%;
+}
+.keyboard-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  width: 100%;
+  min-height: 40px;
+  font-size: 18px;
+  text-align: center;
+  justify-content: center;
+}
+
+.keyboard-item:hover {
+  background-color: #bf0c34;
+  color: #fff;
+  cursor: pointer;
+}
