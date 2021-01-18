@@ -25,6 +25,7 @@ const keys = [
 ];
 
 interface MathKeyboardProps {
+  isDisplayed: boolean;
   onKeyEnter: (key: string) => void;
   onSubmit: () => void;
   moveCursorLeft: () => void;
@@ -35,6 +36,7 @@ interface MathKeyboardProps {
 
 const MathKeyboard = (props: MathKeyboardProps) => {
   const {
+    isDisplayed,
     onKeyEnter,
     moveCursorLeft,
     moveCursorRight,
@@ -67,7 +69,7 @@ const MathKeyboard = (props: MathKeyboardProps) => {
   ];
 
   return (
-    <div className="keyboard-container">
+    <div className={`keyboard-container ${isDisplayed ? "active" : ""}`}>
       {actions.map((action) => (
         <button
           key={action.label}

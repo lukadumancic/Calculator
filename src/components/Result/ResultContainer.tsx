@@ -1,9 +1,14 @@
 import React from "react";
 import Result from "./Result";
 
-const MathResultContainer = () => {
+interface MathResultContainerProps {
+  onClick: () => void;
+}
+
+const MathResultContainer = (props: MathResultContainerProps) => {
+  const { onClick } = props;
   return (
-    <div>
+    <div onClick={onClick}>
       <Result />
     </div>
   );

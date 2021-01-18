@@ -8,11 +8,11 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
+  overflow: hidden;
 }
 
 .content-container {
   max-width: 400px;
   align-items: center;
   display: flex;
-  justify-content: space-between;
 }

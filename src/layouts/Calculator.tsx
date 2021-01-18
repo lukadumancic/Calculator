@@ -8,6 +8,7 @@ import "styles/calculator.css";
 
 const Calculator = () => {
   const mathInputRef = useRef<any>(null);
+  const [isKeyboardDisplayed, setIsKeyboardDisplayed] = useState(false);
   const [calculatorInputValue, setCalculatorInputValue] = useState("");
 
   const onSubmit = () => {};
@@ -16,12 +17,21 @@ const Calculator = () => {
     <div className="calculator-container">
       <MathExpressionInput
         ref={mathInputRef}
-        onSubmit={onSubmit}
-        setValue={setCalculatorInputValue}
         value={calculatorInputValue}
+        onSubmit={onSubmit}
+        showKeyboard={() => setIsKeyboardDisplayed(true)}
+        setValue={setCalculatorInputValue}
       />
-      <ResultContainer />
+      <ResultContainer
+        onClick={() => {
+          setIsKeyboardDisplayed((isDisplayed) => !isDisplayed);
+          if (!isKeyboardDisplayed) {
+            mathInputRef.current.focus();
+          }
+        }}
+      />
       <MathKeyboard
+        isDisplayed={isKeyboardDisplayed}
         onKeyEnter={(key: string) => {
           setCalculatorInputValue((value) => value + key);
         }}

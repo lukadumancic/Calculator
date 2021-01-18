@@ -1,18 +1,20 @@
-import React, { forwardRef, Ref, useImperativeHandle, useRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 interface MathExpressionInputProps {
-  onSubmit: () => void;
-  setValue: (value: string) => void;
   value: string;
+  onSubmit: () => void;
+  showKeyboard: () => void;
+  setValue: (value: string) => void;
 }
 
 const MathExpressionInput = forwardRef(
   (props: MathExpressionInputProps, ref: any) => {
-    const { onSubmit, value, setValue } = props;
+    const { value, onSubmit, showKeyboard, setValue } = props;
     const inputRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({
       moveFocusPosition,
+      focus,
     }));
 
     const moveFocusPosition = (moveCount: number) => {
@@ -31,6 +33,12 @@ const MathExpressionInput = forwardRef(
       }
     };
 
+    const focus = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       onSubmit();
       event.preventDefault();
@@ -42,6 +50,7 @@ const MathExpressionInput = forwardRef(
           <input
             ref={inputRef}
             value={value}
+            onFocus={showKeyboard}
             onChange={(event) => setValue(event.target.value)}
             type="text"
             className="calculator-input"
