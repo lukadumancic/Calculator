@@ -1,7 +1,13 @@
 import React from "react";
 
-const Result = () => {
-  return <span style={{flex: 1}}>result</span>;
+interface ResultProps {
+  result: string;
+}
+
+const Result = (props: ResultProps) => {
+  const { result } = props;
+
+  return <span className="result">{result}</span>;
 };
 
 export default Result;

@@ -1,0 +1,11 @@
+.result-container {
+  padding: 10px;
+  height: 100%;
+}
+
+.result {
+}
+
+.result-error {
+  color: #bf0c34;
+}

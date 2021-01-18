@@ -1,28 +1,48 @@
 import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  calculateExpression,
+  calculatorSelector,
+  setExpression,
+} from "store/slices/calculatorSlices";
 import MathExpressionInput from "components/inputs/MathExpressionInput";
 import MathKeyboard from "components/MathKeyboard";
 import ResultContainer from "components/Result";
 
 import "styles/calculator.css";
+import MathResultContainer from "components/Result/ResultContainer";
 
 const Calculator = () => {
+  const dispatch = useDispatch();
+  const calculatorState = useSelector(calculatorSelector);
+
   const mathInputRef = useRef<any>(null);
   const [isKeyboardDisplayed, setIsKeyboardDisplayed] = useState(false);
-  const [calculatorInputValue, setCalculatorInputValue] = useState("");
 
-  const onSubmit = () => {};
+  const setCalculatorInputValue = (calculatorInputValue: string) => {
+    dispatch(setExpression(calculatorInputValue));
+  };
+
+  const onSubmit = () => {
+    dispatch(calculateExpression());
+  };
+
+  const { expression } = calculatorState;
 
   return (
     <div className="calculator-container">
       <MathExpressionInput
         ref={mathInputRef}
-        value={calculatorInputValue}
+        value={expression}
         onSubmit={onSubmit}
         showKeyboard={() => setIsKeyboardDisplayed(true)}
         setValue={setCalculatorInputValue}
       />
-      <ResultContainer
+      <MathResultContainer
+        result={calculatorState.result}
+        error={calculatorState.error}
+        isEvaluating={calculatorState.isEvaluating}
         onClick={() => {
           setIsKeyboardDisplayed((isDisplayed) => !isDisplayed);
           if (!isKeyboardDisplayed) {
@@ -33,7 +53,7 @@ const Calculator = () => {
       <MathKeyboard
         isDisplayed={isKeyboardDisplayed}
         onKeyEnter={(key: string) => {
-          setCalculatorInputValue((value) => value + key);
+          setCalculatorInputValue(expression + key);
         }}
         moveCursorLeft={() => {
           mathInputRef.current.moveFocusPosition(-1);
@@ -43,7 +63,7 @@ const Calculator = () => {
         }}
         onSubmit={onSubmit}
         deleteKey={() => {
-          setCalculatorInputValue((value) => value.slice(0, value.length - 1));
+          setCalculatorInputValue(expression.slice(0, expression.length - 1));
         }}
         deleteAll={() => {
           setCalculatorInputValue("");
