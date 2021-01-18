@@ -6,6 +6,6 @@ export interface CalculatorStore {
 }
 
 export interface ExpressionResultDto {
-  result: string;
-  error: any;
+  result: string | null;
+  error: string | null;
 }

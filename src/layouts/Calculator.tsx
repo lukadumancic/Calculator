@@ -52,6 +52,7 @@ const Calculator = () => {
       />
       <MathKeyboard
         isDisplayed={isKeyboardDisplayed}
+        onSubmit={onSubmit}
         onKeyEnter={(key: string) => {
           setCalculatorInputValue(expression + key);
         }}
@@ -61,7 +62,6 @@ const Calculator = () => {
         moveCursorRight={() => {
           mathInputRef.current.moveFocusPosition(1);
         }}
-        onSubmit={onSubmit}
         deleteKey={() => {
           setCalculatorInputValue(expression.slice(0, expression.length - 1));
         }}
