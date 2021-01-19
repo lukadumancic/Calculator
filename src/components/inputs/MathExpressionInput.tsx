@@ -45,17 +45,22 @@ const MathExpressionInput = forwardRef(
     };
 
     return (
-      <div>
-        <form className="calculator-input-container" onSubmit={handleSubmit}>
+      <div className="input-container">
+        <form onSubmit={handleSubmit} className="calculator-input-container">
           <input
             ref={inputRef}
             value={value}
             onFocus={showKeyboard}
             onChange={(event) => setValue(event.target.value)}
+            readOnly
             type="text"
             className="calculator-input"
           />
-          <input type="submit" value="Calculate" />
+          <input
+            type="submit"
+            value="Calculate"
+            className="calculator-submit-btn"
+          />
         </form>
       </div>
     );

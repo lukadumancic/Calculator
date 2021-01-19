@@ -1,11 +1,30 @@
 .result-container {
-  padding: 10px;
+  flex: 10;
+  margin-top: calc( var(--padding) * 4);
+  box-sizing: content-box;
+
   height: 100%;
+  width: calc( 100% - var(--padding) * 2 );
+  margin-left: calc( var(--padding) * 2);
+  text-align: center;
 }
 
 .result {
+  display: inline-block;
+  
+  width: 100%;
+  padding: calc( var(--padding) * 4 );
+  box-sizing: border-box;
+  
+  border-radius: var(--radius);
+  
+  font: 400 13.3333px Arial;
+  font-size: 18px;
+  
+  background-color: rgba(0, 0, 0, 0.05);
+  border-bottom: 4px var(--accent) solid;
 }
 
 .result-error {
-  color: #bf0c34;
+  color: var(--accent);
 }
