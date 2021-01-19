@@ -1,4 +1,6 @@
 import axios, { AxiosInstance } from "axios";
+
+import config from "config";
 import { ExpressionResultDto } from "types/Calculator";
 
 export default class ApiService {
@@ -6,7 +8,7 @@ export default class ApiService {
 
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: "http://api.mathjs.org/v4",
+      baseURL: config.mathApiUrl,
     });
   }
 
