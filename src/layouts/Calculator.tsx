@@ -54,7 +54,15 @@ const Calculator = () => {
         isDisplayed={isKeyboardDisplayed}
         onSubmit={onSubmit}
         onKeyEnter={(key: string) => {
-          setCalculatorInputValue(expression + key);
+          const position = mathInputRef.current.getFocusPosition();
+          setCalculatorInputValue(
+            expression.slice(0, position) +
+              key +
+              expression.slice(position, expression.length)
+          );
+          setImmediate(() =>
+            mathInputRef.current.setFocusPosition(position + 1)
+          );
         }}
         moveCursorLeft={() => {
           mathInputRef.current.moveFocusPosition(-1);
@@ -63,7 +71,17 @@ const Calculator = () => {
           mathInputRef.current.moveFocusPosition(1);
         }}
         deleteKey={() => {
-          setCalculatorInputValue(expression.slice(0, expression.length - 1));
+          const position = mathInputRef.current.getFocusPosition();
+          if (position === 0) {
+            return;
+          }
+          setCalculatorInputValue(
+            expression.slice(0, position - 1) +
+              expression.slice(position, expression.length)
+          );
+          setImmediate(() =>
+            mathInputRef.current.setFocusPosition(position - 1)
+          );
         }}
         deleteAll={() => {
           setCalculatorInputValue("");

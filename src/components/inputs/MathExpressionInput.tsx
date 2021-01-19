@@ -14,6 +14,8 @@ const MathExpressionInput = forwardRef(
 
     useImperativeHandle(ref, () => ({
       moveFocusPosition,
+      setFocusPosition,
+      getFocusPosition,
       focus,
     }));
 
@@ -25,12 +27,22 @@ const MathExpressionInput = forwardRef(
           if (newSelectionPosition < 0) {
             newSelectionPosition = 0;
           }
-          inputRef.current.selectionStart = newSelectionPosition;
-          inputRef.current.selectionEnd = newSelectionPosition;
+          setFocusPosition(newSelectionPosition);
         } else {
           inputRef.current.focus();
         }
       }
+    };
+
+    const setFocusPosition = (focusPosition: number) => {
+      if (inputRef.current) {
+        inputRef.current.selectionStart = focusPosition;
+        inputRef.current.selectionEnd = focusPosition;
+      }
+    };
+
+    const getFocusPosition = () => {
+      return inputRef.current?.selectionStart;
     };
 
     const focus = () => {
@@ -52,7 +64,6 @@ const MathExpressionInput = forwardRef(
             value={value}
             onFocus={showKeyboard}
             onChange={(event) => setValue(event.target.value)}
-            readOnly
             type="text"
             className="calculator-input"
           />
